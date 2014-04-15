@@ -100,7 +100,7 @@ namespace MezaIT.NHibernate
         /// <returns>List of entities</returns>
         public IList<T> GetList()
         {
-            return GetList((Expression<Func<T, bool>>) null);
+            return GetList(null, null, -1, -1);
         }
 
         /// <summary>
@@ -111,6 +111,17 @@ namespace MezaIT.NHibernate
         public IList<T> GetList(Expression<Func<T, bool>> criteria)
         {
             return GetList(criteria, null, -1, -1);
+        }
+
+        /// <summary>
+        /// Retrieve a list of entities
+        /// </summary>
+        /// <param name="criteria">Criteria lambda expression</param>
+        /// <param name="sortProperties">Sort property dictionary</param>
+        /// <returns>List of entities</returns>
+        public IList<T> GetList(Expression<Func<T, bool>> criteria, IDictionary<string, SortDirection> sortProperties)
+        {
+            return GetList(criteria, sortProperties, -1, -1);
         }
 
         /// <summary>
@@ -165,7 +176,7 @@ namespace MezaIT.NHibernate
         /// <returns>List of entities</returns>
         public IList<T> GetList(IDictionary<string, SortDirection> sortProperties)
         {
-            return GetList(sortProperties, -1, -1);
+            return GetList(null, sortProperties, -1, -1);
         }
 
         /// <summary>
@@ -176,7 +187,7 @@ namespace MezaIT.NHibernate
         /// <returns>List of entities</returns>
         public IList<T> GetList(int startRowIndex, int maximumRows)
         {
-            return GetList((Expression<Func<T, bool>>) null, startRowIndex, maximumRows);
+            return GetList(null, null, startRowIndex, maximumRows);
         }
 
         /// <summary>
